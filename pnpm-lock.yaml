@@ -20,6 +20,9 @@ importers:
       '@colyseus/monitor':
         specifier: ^0.15.0
         version: 0.15.8
+      '@prisma/client':
+        specifier: ^5.22.0
+        version: 5.22.0(prisma@5.22.0)
       '@tcg/card-data':
         specifier: workspace:*
         version: link:../../packages/card-data
