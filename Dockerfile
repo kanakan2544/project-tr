@@ -17,6 +17,9 @@ COPY packages/bot-framework/package.json ./packages/bot-framework/
 COPY packages/db/package.json ./packages/db/
 COPY apps/server/package.json ./apps/server/
 
+# Prisma schema must exist before install — @tcg/db postinstall runs `prisma generate`
+COPY packages/db/prisma ./packages/db/prisma
+
 RUN pnpm install --frozen-lockfile
 
 # Copy full source (after install so node_modules layer is cached)
