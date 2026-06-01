@@ -1,0 +1,55 @@
+import { CardClass, CardType, Keyword, Rarity } from "@tcg/shared-types"
+import type { UnitCardDefinition } from "@tcg/shared-types"
+
+export const warriorCards: UnitCardDefinition[] = [
+  {
+    id: "iron_sentinel",
+    type: CardType.Unit,
+    cost: 3,
+    infuse: 2,
+    attack: 2,
+    health: 4,
+    keywords: [],
+    metadata: { rarity: Rarity.Common, class: CardClass.Neutral },
+  },
+  {
+    id: "flame_vanguard",
+    type: CardType.Unit,
+    cost: 3,
+    infuse: 2,
+    attack: 4,
+    health: 3,
+    keywords: [Keyword.Charge],
+    metadata: { rarity: Rarity.Common, class: CardClass.Neutral },
+  },
+  {
+    id: "shield_guardian",
+    type: CardType.Unit,
+    cost: 4,
+    infuse: 2,
+    attack: 3,
+    health: 5,
+    keywords: [Keyword.Guard],
+    metadata: { rarity: Rarity.Uncommon, class: CardClass.Neutral },
+  },
+  {
+    id: "overkill_striker",
+    type: CardType.Unit,
+    cost: 4,
+    infuse: 2,
+    attack: 6,
+    health: 2,
+    keywords: [Keyword.Overkill],
+    metadata: { rarity: Rarity.Uncommon, class: CardClass.Neutral },
+  },
+  {
+    id: "blood_reaper",
+    type: CardType.Unit,
+    cost: 5,
+    infuse: 3,
+    attack: 4,
+    health: 4,
+    keywords: [Keyword.Lifesteal, Keyword.Overkill],
+    metadata: { rarity: Rarity.Rare, class: CardClass.Neutral },
+  },
+]

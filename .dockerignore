@@ -1,0 +1,11 @@
+node_modules
+.git
+.env
+.env.local
+*.local
+apps/web
+apps/web/.next
+packages/**/__tests__
+packages/**/coverage
+**/coverage
+**/.turbo

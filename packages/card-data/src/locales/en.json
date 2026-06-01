@@ -1,0 +1,158 @@
+{
+  "iron_sentinel": { "name": "Iron Sentinel", "flavorText": "Unmovable. Unbreakable." },
+  "flame_vanguard": { "name": "Flame Vanguard", "flavorText": "Strike before they can brace." },
+  "shield_guardian": { "name": "Shield Guardian", "flavorText": "Draw their fire. That is the duty." },
+  "overkill_striker": { "name": "Overkill Striker", "flavorText": "No enemy is too dead." },
+  "blood_reaper": { "name": "Blood Reaper", "flavorText": "Every wound feeds the next." },
+  "cyclone_sovereign": { "name": "Cyclone Sovereign", "flavorText": "The storm does not wait. Neither does she." },
+  "quick_strike": {
+    "name": "Quick Strike",
+    "text": "Deal 3 damage to an enemy unit.",
+    "flavorText": "Fast enough to matter."
+  },
+  "restoration": {
+    "name": "Restoration",
+    "text": "Heal your player for 4.",
+    "flavorText": "The body remembers what it was."
+  },
+  "silence_bolt": {
+    "name": "Silence Bolt",
+    "text": "Silence an enemy unit.",
+    "flavorText": "Words fail. So do abilities."
+  },
+  "ember_seer": {
+    "name": "Ember Seer",
+    "text": "ON_SUMMON: Deal 2 damage to the enemy player.",
+    "flavorText": "Her arrival burns."
+  },
+  "grave_sentinel": {
+    "name": "Grave Sentinel",
+    "text": "ON_DESTROY: Draw a card.",
+    "flavorText": "Even in death, knowledge flows."
+  },
+  "storm_channeler": {
+    "name": "Storm Channeler",
+    "text": "ON_ATTACK: Gain +1 Attack.\n1/turn (cost 2): Deal 2 damage to the enemy player.",
+    "flavorText": "Each swing draws more lightning."
+  },
+  "inferno_vanguard": {
+    "name": "Inferno Vanguard",
+    "text": "Primed (infused 2×): Gain +2/+2. ON_SUMMON if Primed: Gain +1 Attack.",
+    "flavorText": "Twice refined. Twice the fury."
+  },
+  "arcane_healer": {
+    "name": "Arcane Healer",
+    "text": "1/turn (cost 1): Heal your player for 3.",
+    "flavorText": "Pain is just a problem waiting to be solved."
+  },
+  "void_reaper": {
+    "name": "Void Reaper",
+    "text": "1/turn (cost 2): Deal 3 damage to an enemy unit.",
+    "flavorText": "Your soul. My resource."
+  },
+  "iron_golem": {
+    "name": "Iron Golem",
+    "text": "1/turn (cost 2): Gain +2 Health.",
+    "flavorText": "Built to last."
+  },
+  "shadow_blade": {
+    "name": "Shadow Blade",
+    "text": "ON_ATTACK: Deal 1 damage to the enemy player.",
+    "flavorText": "Strikes twice — once seen, once felt."
+  },
+  "forest_shaman": {
+    "name": "Forest Shaman",
+    "text": "ON_SUMMON: Draw a card.\n1/turn (cost 2): Give an ally unit +3 Health.",
+    "flavorText": "Nature answers when called."
+  },
+  "berserker": {
+    "name": "Berserker",
+    "text": "ON_ATTACK: Gain +2 Attack.\n1/turn (cost 3): Deal 4 damage to any unit.",
+    "flavorText": "The more blood spilled, the stronger the rage."
+  },
+
+  "donald_ferguson": {
+    "name": "Donald Ferguson",
+    "text": "ON_SUMMON: Move the top card of your deck to your Revolve pile.",
+    "flavorText": "Every step feeds the cycle."
+  },
+  "reanimen": {
+    "name": "Reanimen",
+    "text": "",
+    "flavorText": "Built for speed. Built for pain."
+  },
+  "dupli_cate": {
+    "name": "Dupli-Cate",
+    "text": "ON_SUMMON: Add a Dupli-Cate to your hand.",
+    "flavorText": "One is never enough."
+  },
+  "atom_eve": {
+    "name": "Atom Eve",
+    "text": "ON_SUMMON: Move the top card of your deck to your Revolve pile.",
+    "flavorText": "She reshapes reality — and your deck."
+  },
+  "robot": {
+    "name": "Robot",
+    "text": "ON_SUMMON: Move the top 2 cards of your deck to your Revolve pile.",
+    "flavorText": "Efficiency at the cost of tomorrow."
+  },
+  "cecil_stedman": {
+    "name": "Cecil Stedman",
+    "text": "Adjacent allies gain +3 Attack for each time your deck has revolved.",
+    "flavorText": "Control is the most powerful weapon."
+  },
+  "rex_splode": {
+    "name": "Rex Splode",
+    "text": "ON_ATTACK: Move the top card of your deck to your Revolve pile.",
+    "flavorText": "Every punch advances the plan."
+  },
+  "monster_girl": {
+    "name": "Monster Girl",
+    "flavorText": "Don't let the name fool you."
+  },
+  "oliver_grayson": {
+    "name": "Oliver Grayson",
+    "text": "Primed (revolved 1×): Gain Evasion.",
+    "flavorText": "He grew up fast. Too fast."
+  },
+  "tech_jacket": {
+    "name": "Tech Jacket",
+    "text": "",
+    "flavorText": "Zack Thompson found it first. That was enough."
+  },
+  "allen_the_alien": {
+    "name": "Allen the Alien",
+    "text": "1/turn (cost 2): Gain +0/+1.",
+    "flavorText": "He gets stronger every time he nearly dies."
+  },
+  "invincible": {
+    "name": "Invincible",
+    "text": "Primed (revolved 1×): Gain +1/+1 and Quick Attack.",
+    "flavorText": "Mark Grayson. He's getting better."
+  },
+  "immortal": {
+    "name": "Immortal",
+    "text": "ON_DESTROY: Move this unit to your Revolve pile.",
+    "flavorText": "Death is a temporary inconvenience."
+  },
+  "omni_man": {
+    "name": "Omni-Man",
+    "text": "Primed (revolved 1×): Gain +2/+2 and Piercing.",
+    "flavorText": "Nolan Grayson. He came to conquer."
+  },
+  "send_to_the_jail": {
+    "name": "Send to the Jail",
+    "text": "Move the lowest-cost card in the opponent's Revolve pile to their discard pile.",
+    "flavorText": "Some problems you bury. Permanently."
+  },
+  "team_up": {
+    "name": "Team Up",
+    "text": "If you control 5 units, all your units gain +3/+3.",
+    "flavorText": "The whole is greater than the sum."
+  },
+  "cross_the_line": {
+    "name": "Cross the Line",
+    "text": "Give an ally unit +3 Attack. It gains: ON_KILL — move 3 cards from your Revolve pile to the top of your deck.",
+    "flavorText": "Every kill brings us closer."
+  }
+}

@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --void: #1a1f2e;
+  --panel: #26314f;
+  --panel-deep: #1e2740;
+  --panel-mid: #324368;
+  --rim: #5b6f99;
+  --rim-bright: #8aa0cc;
+  --neon: #f4c95d;
+  --neon-dim: #e8b923;
+  --neon-soft: #7a5800;
+  --foe: #ff9d57;
+  --foe-dim: #d97030;
+  --foe-soft: #6b3810;
+  --text-primary: #edf2ff;
+  --text-muted: #a8b4d1;
+  --text-muted2: #6a789a;
+  --cyber-purple: #9c6bff;
+  --cyber-violet: #8c7cff;
+  --cyber-pink: #ff8dc7;
+  --cyber-sky: #6fa7ff;
+  --cyber-teal: #7ce7c0;
+  --life-green: #4ecb71;
+  --life-red: #ff6d6d;
+}
+
+body {
+  @apply bg-void font-body text-text-primary;
+}
+
+/* Subtle panel noise texture */
+.tex-panel {
+  position: relative;
+}
+.tex-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  border-radius: inherit;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* Horizontal scanline overlay */
+.tex-scanline {
+  position: relative;
+  overflow: hidden;
+}
+.tex-scanline::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(244,201,93,0.03) 0px,
+    rgba(244,201,93,0.03) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  z-index: 0;
+}
+
+/* Neon grid texture overlay */
+.tex-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(244,201,93,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244,201,93,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  z-index: 0;
+}
+
+/* Halftone dot pattern overlay */
+.tex-halftone {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(244,201,93,0.08) 1px, transparent 1.5px);
+  background-size: 6px 6px;
+  mask-image: radial-gradient(ellipse at center, #000 20%, transparent 70%);
+  z-index: 0;
+}
+
+/* Vivid radial background glow for lobby */
+.bg-void-glow {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 40%, rgba(244,201,93,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 70% 70%, rgba(156,107,255,0.12) 0%, transparent 60%),
+    #1a1f2e;
+}
+
+/* Battlefield area radial cyan glow (my side) */
+.bg-battlefield-glow {
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(244,201,93,0.18) 0%, transparent 100%);
+}
+
+/* Battlefield area radial ember glow (opponent side) */
+.bg-battlefield-glow-foe {
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255,157,87,0.16) 0%, transparent 100%);
+}
+
+/* Neon shimmer animation for energy/infuse zones */
+@keyframes neon-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-neon-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(244,201,93,0.15) 40%,
+    rgba(255,216,110,0.25) 50%,
+    rgba(244,201,93,0.15) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: neon-shimmer 2s linear infinite;
+}
+
+/* Neon pulse glow for active/targetable elements */
+@keyframes magic-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(244,201,93,0.3); }
+  50% { box-shadow: 0 0 18px rgba(244,201,93,0.6); }
+}
+
+@keyframes rose-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(224,64,192,0.3); }
+  50% { box-shadow: 0 0 18px rgba(224,64,192,0.6); }
+}
+
+@keyframes magic-border-pulse {
+  0%, 100% { border-color: rgba(244,201,93,0.5); }
+  50% { border-color: rgba(0,184,255,1); }
+}
+
+.animate-magic-pulse {
+  animation: magic-pulse 2s ease-in-out infinite;
+}
+
+.animate-rose-pulse {
+  animation: rose-pulse 2s ease-in-out infinite;
+}
+
+.animate-magic-border {
+  animation: magic-border-pulse 2s ease-in-out infinite;
+}
+
+/* Neon ring pulse for circular End button */
+@keyframes neon-ring-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px #f4c95d, 0 0 18px rgba(244,201,93,0.5); }
+  50%       { box-shadow: 0 0 0 3px #f4c95d, 0 0 32px rgba(244,201,93,0.8); }
+}
+.animate-neon-ring { animation: neon-ring-pulse 2s ease-in-out infinite; }
+
+/* Ember ring pulse for opponent Ace slot */
+@keyframes foe-ring-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px #ff9d57, 0 0 18px rgba(255,157,87,0.5); }
+  50%       { box-shadow: 0 0 0 3px #ff9d57, 0 0 32px rgba(255,157,87,0.8); }
+}
+.animate-foe-ring { animation: foe-ring-pulse 2s ease-in-out infinite; }
+
+/* Energy display ring glow */
+@keyframes energy-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(244,201,93,0.6), 0 0 22px rgba(244,201,93,0.3); }
+  50%       { box-shadow: 0 0 0 3px rgba(244,201,93,0.9), 0 0 36px rgba(244,201,93,0.6); }
+}
+.animate-energy-pulse { animation: energy-pulse 2.5s ease-in-out infinite; }
+
+/* YOUR TURN badge pulse */
+@keyframes turn-pulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(244,201,93,0.4), 0 0 0 1px rgba(244,201,93,0.5); }
+  50%       { box-shadow: 0 0 22px rgba(244,201,93,0.7), 0 0 0 2px rgba(244,201,93,0.9); }
+}
+.animate-turn-pulse { animation: turn-pulse 2s ease-in-out infinite; }
+
+/* Pulsing active-glow alias (keep for compat, now neon) */
+@keyframes active-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(244,201,93,0); }
+  50%       { box-shadow: 0 0 10px 3px rgba(244,201,93,0.22); }
+}
+.animate-active-glow { animation: active-glow 2.5s ease-in-out infinite; }
+
+/* Animated grid drift — seamless loop */
+@keyframes grid-drift {
+  0%   { background-position: 0 0, 0 0; }
+  100% { background-position: 28px 28px, 28px 28px; }
+}
+
+.tex-grid-animated {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(244,201,93,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244,201,93,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  z-index: 0;
+  animation: grid-drift 8s linear infinite;
+}

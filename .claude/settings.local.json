@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\LENOVO\\\\OneDrive\\\\Desktop\\\\Side Project\\\\tcg-online\\\\\" -Force | Select-Object Name, PSIsContainer | Format-Table -AutoSize)",
+      "Bash(ls -la '/mnt/c/Users/LENOVO/OneDrive/Desktop/Side Project/tcg-online/')",
+      "Read(//mnt/c/Users/LENOVO/OneDrive/Desktop/Side Project/**)",
+      "Bash(pnpm install *)",
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "PowerShell(npm install -g pnpm 2>&1)",
+      "PowerShell(pnpm --version 2>&1)",
+      "Bash(pnpm --filter @tcg/game-engine test)",
+      "Bash(cd /c/Users/LENOVO/OneDrive/Desktop/'Side Project'/tcg-online && grep -r \"autoDispose\" --include=\"*.ts\" --include=\"*.tsx\" -A 2 -B 2 .)",
+      "Read(//c/c/Users/LENOVO/OneDrive/Desktop/Side Project/**)",
+      "Bash(xargs grep -l \"StrictMode\\\\|ghost\\\\|two tabs\\\\|multiple clients\")",
+      "Bash(pnpm --filter @tcg/web typecheck)",
+      "Bash(pnpm typecheck *)",
+      "Read(//c/Users/LENOVO/.claude/plans/**)",
+      "Bash(pnpm --filter @tcg/game-engine test --run)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\LENOVO\\\\OneDrive\\\\Desktop\\\\Side Project\\\\tcg-online\\\\apps\\\\web\" -Recurse -File -Name)",
+      "Bash(pnpm test *)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\LENOVO\\\\OneDrive\\\\Desktop\\\\Side Project\\\\tcg-online\\\\packages\\\\card-data\" -Recurse)",
+      "Bash(Select-Object FullName)",
+      "Bash(pnpm --filter @tcg/card-data build)",
+      "Bash(pnpm --filter @tcg/db db:generate)",
+      "Bash(pnpm --filter @tcg/game-engine test deck-validator)",
+      "Bash(Copy-Item -Path \"c:\\\\Users\\\\LENOVO\\\\OneDrive\\\\Desktop\\\\Side Project\\\\tcg-online\\\\.env\" -Destination \"c:\\\\Users\\\\LENOVO\\\\OneDrive\\\\Desktop\\\\Side Project\\\\tcg-online\\\\apps\\\\web\\\\.env.local\")",
+      "PowerShell($r = Test-NetConnection -ComputerName localhost -Port 5432 -WarningAction SilentlyContinue; \"Postgres 5432 open: $\\($r.TcpTestSucceeded\\)\")",
+      "Bash(pnpm --filter @tcg/game-engine test --reporter=verbose)",
+      "Bash(curl -s http://localhost:2567/health)",
+      "Bash(node -e \"const { execSync } = require\\('child_process'\\); try { const r = execSync\\('curl -s http://localhost:2567/colyseus', {timeout: 3000}\\); console.log\\(r.toString\\(\\).substring\\(0, 500\\)\\); } catch\\(e\\) { console.log\\('Failed:', e.message\\); }\")",
+      "Bash(node -e \"require\\('dotenv'\\).config\\({path:'.env'}\\); console.log\\('AUTH_SECRET:', process.env.AUTH_SECRET ? 'SET \\(length='+process.env.AUTH_SECRET.length+'\\)' : 'NOT SET'\\)\")",
+      "Bash(node -e \"const p = require\\('./apps/server/node_modules/dotenv/lib/main.js'\\); p.config\\({path:'.env'}\\); console.log\\('AUTH_SECRET:', process.env.AUTH_SECRET ? 'SET' : 'NOT SET'\\)\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\LENOVO\\.claude\\plans"
+    ]
+  }
+}

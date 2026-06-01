@@ -1,0 +1,22 @@
+export const INVINCIBLE_STARTER_DECK = {
+  name: "Invincible Starter",
+  aceCardId: "invincible",
+  cardIds: [
+    "donald_ferguson", "donald_ferguson",
+    "reanimen", "reanimen",
+    "dupli_cate", "dupli_cate",
+    "atom_eve", "atom_eve",
+    "send_to_the_jail", "send_to_the_jail",
+    "robot", "robot",
+    "rex_splode", "rex_splode",
+    "cross_the_line", "cross_the_line",
+    "monster_girl", "monster_girl",
+    "oliver_grayson", "oliver_grayson",
+    "tech_jacket", "tech_jacket",
+    "team_up", "team_up",
+    "allen_the_alien", "allen_the_alien",
+    "immortal", "immortal",
+    "omni_man",
+    "cecil_stedman",
+  ],
+} as const

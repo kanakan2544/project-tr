@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TCG Board</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #d9d9d9;
+      font-family: Arial, sans-serif;
+    }
+
+    .board {
+      width: 1366px;
+      height: 768px;
+      margin: auto;
+      position: relative;
+      background: #d9d9d9;
+      overflow: hidden;
+    }
+
+    /* GRID LINES */
+
+    .v-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 0;
+      border-left: 10px dotted black;
+    }
+
+    .h-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 0;
+      border-top: 10px dotted black;
+    }
+
+    /* CARD STYLE */
+
+    .box {
+      position: absolute;
+
+      background: #f3d85b;
+      border: 4px solid black;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+      font-weight: bold;
+      color: black;
+
+      padding: 10px;
+    }
+
+    .card {
+      width: 128px;
+      height: 132px;
+      font-size: 22px;
+      line-height: 1.4;
+    }
+
+    .small {
+      width: 95px;
+      height: 64px;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .resource {
+      width: 220px;
+      height: 92px;
+      font-size: 22px;
+    }
+
+    .end-turn {
+      width: 145px;
+      height: 70px;
+      font-size: 22px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="board">
+
+    <!-- VERTICAL LINES -->
+    <div class="v-line" style="left: 170px;"></div>
+    <div class="v-line" style="left: 265px;"></div>
+
+    <div class="v-line" style="left: 360px;"></div>
+    <div class="v-line" style="left: 683px;"></div>
+    <div class="v-line" style="left: 1008px;"></div>
+
+    <div class="v-line" style="left: 1105px;"></div>
+    <div class="v-line" style="left: 1195px;"></div>
+
+    <!-- HORIZONTAL LINES -->
+    <div class="h-line" style="top: 210px;"></div>
+    <div class="h-line" style="top: 382px;"></div>
+    <div class="h-line" style="top: 554px;"></div>
+
+    <!-- TOP LEFT -->
+
+    <div class="box card" style="left: 18px; top: 48px;">
+      deck<br>(amount)
+    </div>
+
+    <div class="box small" style="left: 148px; top: 48px;">
+      hand<br>amount
+    </div>
+
+    <div class="box small" style="left: 148px; top: 116px;">
+      discard pile<br>amount
+    </div>
+
+    <!-- TOP HAND -->
+
+    <div class="box card" style="left: 348px; top: 38px;">card<br>on hand</div>
+    <div class="box card" style="left: 485px; top: 38px;">card<br>on hand</div>
+    <div class="box card" style="left: 622px; top: 38px;">card<br>on hand</div>
+    <div class="box card" style="left: 759px; top: 38px;">card<br>on hand</div>
+    <div class="box card" style="left: 896px; top: 38px;">card<br>on hand</div>
+
+    <!-- TOP RIGHT -->
+
+    <div class="box card" style="left: 1215px; top: 48px;">
+      revole pile<br>(amount)
+    </div>
+
+    <!-- OPPONENT -->
+
+    <div class="box card" style="left: 14px; top: 240px;">
+      opponent’s<br>ace card
+    </div>
+
+    <div class="box small" style="left: 170px; top: 240px;">
+      opponent<br>HP
+    </div>
+
+    <!-- OPPONENT BOARD -->
+
+    <div class="box card" style="left: 300px; top: 233px;">card<br>on board</div>
+    <div class="box card" style="left: 460px; top: 233px;">card<br>on board</div>
+    <div class="box card" style="left: 620px; top: 233px;">card<br>on board</div>
+    <div class="box card" style="left: 780px; top: 233px;">card<br>on board</div>
+    <div class="box card" style="left: 940px; top: 233px;">card<br>on board</div>
+
+    <!-- CENTER RIGHT -->
+
+    <div class="box resource" style="left: 1125px; top: 246px;">
+      infuse resource
+    </div>
+
+    <div class="box end-turn" style="left: 1128px; top: 350px;">
+      end turn
+    </div>
+
+    <div class="box resource" style="left: 1125px; top: 428px;">
+      infuse resource
+    </div>
+
+    <!-- PLAYER -->
+
+    <div class="box card" style="left: 14px; top: 412px;">
+      player’s<br>ace card
+    </div>
+
+    <div class="box small" style="left: 170px; top: 412px;">
+      player<br>HP
+    </div>
+
+    <!-- PLAYER BOARD -->
+
+    <div class="box card" style="left: 300px; top: 404px;">card<br>on board</div>
+    <div class="box card" style="left: 460px; top: 404px;">card<br>on board</div>
+    <div class="box card" style="left: 620px; top: 404px;">card<br>on board</div>
+    <div class="box card" style="left: 780px; top: 404px;">card<br>on board</div>
+    <div class="box card" style="left: 940px; top: 404px;">card<br>on board</div>
+
+    <!-- BOTTOM LEFT -->
+
+    <div class="box card" style="left: 18px; top: 598px;">
+      deck<br>(amount)
+    </div>
+
+    <div class="box small" style="left: 148px; top: 598px;">
+      hand<br>amount
+    </div>
+
+    <div class="box small" style="left: 148px; top: 666px;">
+      discard pile<br>amount
+    </div>
+
+    <!-- BOTTOM HAND -->
+
+    <div class="box card" style="left: 348px; top: 598px;">card<br>on hand</div>
+    <div class="box card" style="left: 485px; top: 598px;">card<br>on hand</div>
+    <div class="box card" style="left: 622px; top: 598px;">card<br>on hand</div>
+    <div class="box card" style="left: 759px; top: 598px;">card<br>on hand</div>
+    <div class="box card" style="left: 896px; top: 598px;">card<br>on hand</div>
+
+    <!-- BOTTOM RIGHT -->
+
+    <div class="box card" style="left: 1215px; top: 598px;">
+      revole pile<br>(amount)
+    </div>
+
+  </div>
+
+</body>
+</html>

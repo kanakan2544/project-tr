@@ -1,0 +1,1391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>AFTER★CLUB — Card Society</title>
+<meta name="viewport" content="width=1440" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Caveat:wght@500;700&family=Shippori+Mincho:wght@700;800&family=JetBrains+Mono:wght@400;700&family=Inter:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --cream:#f6ecd6;
+  --cream-2:#fbf3df;
+  --paper:#fffaee;
+  --pink:#ff3d8b;
+  --pink-2:#ff80b5;
+  --cyan:#3acff5;
+  --cyan-2:#92e7ff;
+  --lime:#c6ff3d;
+  --lime-2:#e1ff8a;
+  --purple:#5b3aa8;
+  --purple-2:#7c5dd1;
+  --red:#ff4530;
+  --orange:#ff9a3d;
+  --ink:#15131a;
+  --ink-2:#2a2632;
+  --pencil:#665f72;
+  --grid-line:rgba(21,19,26,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#1a1614;color:var(--ink);font-family:"Zen Kaku Gothic New","Inter",sans-serif}
+body{min-height:100vh}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+.disp{font-family:Anton,Impact,sans-serif;letter-spacing:.005em;text-transform:uppercase;font-weight:400}
+.serif{font-family:"Shippori Mincho",serif}
+.hand{font-family:Caveat,"Comic Sans MS",cursive;font-weight:700}
+button{font-family:inherit;cursor:pointer}
+
+/* ── PAGE SHELL ──────────────────────────────────────────── */
+.page{
+  background:#0e0c14;
+  background-image:
+    radial-gradient(circle at 20% 0%,rgba(255,61,139,.08),transparent 40%),
+    radial-gradient(circle at 80% 30%,rgba(58,207,245,.06),transparent 40%);
+  padding:48px 0 96px;
+}
+.page-head{
+  max-width:1320px;margin:0 auto 32px;padding:0 32px;
+  display:flex;align-items:flex-end;justify-content:space-between;color:#f6ecd6;
+}
+.page-head h1{font-family:Anton;font-size:64px;line-height:.9;margin:0;letter-spacing:.01em}
+.page-head h1 em{color:var(--pink);font-style:normal}
+.page-head h1 .star{color:var(--lime);display:inline-block;transform:translateY(-6px) rotate(-12deg);font-size:48px}
+.page-head .sub{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.32em;color:rgba(246,236,214,.6);margin-top:6px}
+.page-head .meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-family:"JetBrains Mono";font-size:11px;letter-spacing:.18em;color:rgba(246,236,214,.55)}
+.page-head .meta .pill{padding:5px 10px;background:var(--lime);color:var(--ink);font-weight:700;letter-spacing:.18em;border-radius:2px}
+
+/* artboards */
+.frame{
+  position:relative;width:1280px;margin:0 auto;
+  background:var(--cream);
+  box-shadow:0 32px 80px rgba(0,0,0,.5);
+  border-radius:6px;overflow:hidden;
+}
+.frame + .frame{margin-top:36px}
+.frame-tag{
+  position:absolute;left:18px;top:-14px;z-index:10;
+  font-family:Anton;font-size:14px;letter-spacing:.18em;text-transform:uppercase;
+  background:var(--ink);color:var(--cream);padding:6px 14px;border-radius:2px;
+  box-shadow:3px 3px 0 var(--pink);
+}
+.frame-tag em{color:var(--lime);font-style:normal;margin-right:8px}
+.frame-side{
+  position:absolute;right:14px;top:14px;z-index:10;
+  display:flex;gap:6px;
+}
+.frame-side i{width:9px;height:9px;background:rgba(0,0,0,.16);border-radius:50%}
+.frame-side i:nth-child(1){background:var(--pink)}
+.frame-side i:nth-child(2){background:var(--cyan)}
+.frame-side i:nth-child(3){background:var(--lime)}
+
+/* ── SHARED TEXTURES ──────────────────────────────────────── */
+.tex-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;
+}
+.tex-halftone{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(21,19,26,.18) 1px,transparent 1.6px);
+  background-size:6px 6px;
+  mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
+}
+.tex-paper{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(0deg,rgba(21,19,26,.025) 0 1px,transparent 1px 22px),
+    radial-gradient(circle at 80% 20%,rgba(91,58,168,.04),transparent 50%);
+}
+.tex-noise{
+  position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.18;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.7'/></svg>");
+}
+
+/* ── STICKERS / WASHI / SPEED LINES ───────────────────────── */
+.washi{
+  position:absolute;height:36px;
+  background-repeat:repeat-x;
+  background-size:24px 36px;
+  box-shadow:0 4px 10px rgba(0,0,0,.18);
+  opacity:.95;
+}
+.washi.pink{background:repeating-linear-gradient(45deg,var(--pink) 0 6px,#ff5fa3 6px 12px)}
+.washi.cyan{background:repeating-linear-gradient(45deg,var(--cyan) 0 6px,#5fe0ff 6px 12px)}
+.washi.lime{background:repeating-linear-gradient(45deg,var(--lime) 0 6px,#dcff7a 6px 12px)}
+.washi.dot{background:radial-gradient(circle,var(--ink) 25%,transparent 26%) 0 0/12px 12px,var(--cream-2)}
+
+.sticker{
+  position:absolute;display:flex;align-items:center;justify-content:center;
+  font-family:Anton;text-transform:uppercase;letter-spacing:.04em;
+  border:2px solid var(--ink);
+  box-shadow:4px 4px 0 var(--ink);
+  user-select:none;
+}
+.sticker.round{border-radius:50%}
+.sticker.pink{background:var(--pink);color:#fff}
+.sticker.cyan{background:var(--cyan);color:var(--ink)}
+.sticker.lime{background:var(--lime);color:var(--ink)}
+.sticker.purple{background:var(--purple);color:#fff}
+.sticker.cream{background:var(--cream-2);color:var(--ink)}
+
+.speed-lines{
+  position:absolute;inset:0;pointer-events:none;
+  background:conic-gradient(from 0deg at var(--cx,50%) var(--cy,50%),
+    transparent 0deg,rgba(0,0,0,.65) 1deg,transparent 4deg,
+    transparent 14deg,rgba(0,0,0,.55) 15deg,transparent 18deg,
+    transparent 28deg,rgba(0,0,0,.45) 29deg,transparent 32deg,
+    transparent 44deg,rgba(0,0,0,.55) 45deg,transparent 48deg,
+    transparent 60deg,rgba(0,0,0,.4) 61deg,transparent 64deg,
+    transparent 78deg,rgba(0,0,0,.55) 79deg,transparent 82deg,
+    transparent 94deg,rgba(0,0,0,.4) 95deg,transparent 98deg,
+    transparent 110deg,rgba(0,0,0,.55) 111deg,transparent 114deg,
+    transparent 130deg,rgba(0,0,0,.45) 131deg,transparent 134deg,
+    transparent 150deg,rgba(0,0,0,.55) 151deg,transparent 154deg,
+    transparent 170deg,rgba(0,0,0,.4) 171deg,transparent 174deg,
+    transparent 190deg,rgba(0,0,0,.55) 191deg,transparent 194deg,
+    transparent 210deg,rgba(0,0,0,.45) 211deg,transparent 214deg,
+    transparent 230deg,rgba(0,0,0,.5) 231deg,transparent 234deg,
+    transparent 250deg,rgba(0,0,0,.55) 251deg,transparent 254deg,
+    transparent 270deg,rgba(0,0,0,.45) 271deg,transparent 274deg,
+    transparent 290deg,rgba(0,0,0,.55) 291deg,transparent 294deg,
+    transparent 310deg,rgba(0,0,0,.45) 311deg,transparent 314deg,
+    transparent 330deg,rgba(0,0,0,.55) 331deg,transparent 334deg,
+    transparent 350deg,rgba(0,0,0,.4) 351deg,transparent 354deg,
+    transparent 360deg);
+  mask-image:radial-gradient(circle at var(--cx,50%) var(--cy,50%),transparent 18%,black 60%);
+}
+
+/* paint stroke bar (HP / RESOLVE) */
+.pbar{
+  position:relative;height:18px;background:rgba(21,19,26,.09);
+  border:2px solid var(--ink);
+  --pbar-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'><path d='M0 5 Q10 1 25 4 T55 5 T90 4 T130 6 T180 4 T200 5 L200 16 Q180 18 150 15 T100 17 T55 14 T20 17 T0 15 Z' fill='black'/></svg>");
+}
+.pbar-fill{position:absolute;left:2px;top:2px;bottom:2px;
+  -webkit-mask:var(--pbar-mask) center/100% 100% no-repeat;
+  mask:var(--pbar-mask) center/100% 100% no-repeat;
+}
+.pbar-fill.pink{background:linear-gradient(90deg,var(--pink),var(--red))}
+.pbar-fill.cyan{background:linear-gradient(90deg,var(--cyan),var(--purple))}
+.pbar-fill.lime{background:linear-gradient(90deg,var(--lime),var(--orange))}
+.pbar-text{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;
+  padding:0 10px;font-family:"JetBrains Mono";font-weight:700;font-size:11px;color:#fff;
+  text-shadow:1px 1px 0 var(--ink);letter-spacing:.1em;
+}
+
+/* ── 1. MAIN MENU ─────────────────────────────────────────── */
+.menu{
+  position:relative;width:1280px;height:780px;
+  background:
+    radial-gradient(ellipse at 30% 60%,#ffd6e7 0%,transparent 50%),
+    radial-gradient(ellipse at 80% 30%,#cbeaff 0%,transparent 55%),
+    var(--cream);
+  overflow:hidden;
+}
+.menu .tex-grid{opacity:.5}
+.menu .tex-halftone{opacity:.6}
+
+/* magenta panel slash */
+.menu-slash{
+  position:absolute;inset:0;pointer-events:none;
+}
+.menu-slash::before{
+  content:"";position:absolute;
+  width:140%;height:280px;left:-20%;top:280px;
+  background:var(--pink);
+  transform:rotate(-9deg);
+  box-shadow:0 24px 0 -8px var(--ink);
+}
+.menu-slash::after{
+  content:"";position:absolute;
+  width:140%;height:60px;left:-20%;top:520px;
+  background:var(--lime);
+  transform:rotate(-9deg);
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+}
+
+/* school crest top-left */
+.menu-crest{
+  position:absolute;left:36px;top:36px;display:flex;align-items:center;gap:14px;z-index:5;
+}
+.menu-crest-mark{
+  width:64px;height:64px;background:var(--ink);color:var(--cream);
+  display:flex;align-items:center;justify-content:center;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+  position:relative;
+}
+.menu-crest-mark span{font-family:"Shippori Mincho";font-size:36px;font-weight:800;line-height:1}
+.menu-crest-mark::after{content:"";position:absolute;inset:6px;border:1.5px solid var(--cream);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.menu-crest-text{display:flex;flex-direction:column;line-height:1.05}
+.menu-crest-text .jp{font-family:"Shippori Mincho";font-size:14px;letter-spacing:.32em;color:var(--ink)}
+.menu-crest-text .en{font-family:Anton;font-size:18px;letter-spacing:.06em}
+
+/* top-right HUD */
+.menu-hud{
+  position:absolute;right:36px;top:30px;z-index:5;
+  display:flex;gap:10px;
+}
+.menu-hud .pill{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 14px;background:var(--paper);border:2px solid var(--ink);
+  font-family:"JetBrains Mono";font-size:11px;letter-spacing:.18em;
+  box-shadow:3px 3px 0 var(--ink);
+}
+.menu-hud .pill b{font-family:Anton;font-size:14px}
+.menu-hud .pill.lime{background:var(--lime)}
+.menu-hud .pill.cyan{background:var(--cyan)}
+
+/* logo block */
+.menu-logo-wrap{
+  position:absolute;left:60px;top:140px;z-index:6;
+}
+.menu-logo-jp{
+  display:inline-block;
+  font-family:"Shippori Mincho";font-size:26px;letter-spacing:.32em;
+  background:var(--ink);color:var(--lime);padding:6px 14px;
+  transform:rotate(-3deg);
+  box-shadow:6px 6px 0 var(--cyan);
+}
+.menu-logo{
+  margin-top:16px;
+  font-family:Anton;font-size:170px;line-height:.84;letter-spacing:-.01em;color:var(--ink);
+  text-transform:uppercase;
+  position:relative;
+}
+.menu-logo .row{display:block;position:relative}
+.menu-logo .star{color:var(--pink);font-size:120px;display:inline-block;transform:translateY(-26px) rotate(18deg)}
+.menu-logo .row .o{display:inline-block;position:relative;color:var(--cream);-webkit-text-stroke:3px var(--ink)}
+.menu-logo .row .o::before{
+  content:"";position:absolute;left:8%;right:8%;top:14%;bottom:14%;
+  background:var(--cyan);border-radius:50%;z-index:-1;
+}
+.menu-logo .strike-row{color:var(--cream);-webkit-text-stroke:3px var(--ink)}
+.menu-logo .strike-row::after{
+  content:"";position:absolute;left:-2%;right:-2%;top:50%;height:14px;background:var(--pink);transform:rotate(-2deg);
+}
+.menu-logo .row .swap{color:var(--pink)}
+
+.menu-tagline{
+  margin-top:6px;
+  font-family:Caveat;font-size:34px;color:var(--ink);transform:rotate(-2deg);display:inline-block;
+}
+
+/* CTA stack */
+.menu-cta{
+  position:absolute;right:60px;top:240px;z-index:7;
+  display:flex;flex-direction:column;gap:14px;width:340px;
+}
+.menu-btn{
+  position:relative;
+  appearance:none;border:3px solid var(--ink);background:var(--paper);
+  padding:14px 18px;text-align:left;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  box-shadow:6px 6px 0 var(--ink);
+  transition:transform .15s,box-shadow .15s;
+}
+.menu-btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
+.menu-btn .num{font-family:Anton;font-size:24px;color:var(--ink);min-width:40px}
+.menu-btn .label{flex:1;font-family:Anton;font-size:24px;letter-spacing:.06em;text-transform:uppercase}
+.menu-btn .sub{display:block;font-family:"JetBrains Mono";font-size:10px;letter-spacing:.18em;color:var(--pencil);margin-top:2px}
+.menu-btn .arrow{font-family:Anton;font-size:30px;color:var(--ink)}
+.menu-btn.primary{background:var(--pink);color:var(--cream)}
+.menu-btn.primary .num,.menu-btn.primary .arrow{color:var(--cream)}
+.menu-btn.primary .sub{color:rgba(255,255,255,.85)}
+.menu-btn.lime{background:var(--lime)}
+.menu-btn.cyan{background:var(--cyan)}
+.menu-btn.purple{background:var(--purple);color:var(--cream)}
+.menu-btn.purple .num,.menu-btn.purple .arrow{color:var(--cream)}
+.menu-btn.purple .sub{color:rgba(255,255,255,.7)}
+.menu-btn.dotted{background:transparent;border-style:dashed}
+
+/* character placeholder card center-left */
+.menu-char{
+  position:absolute;left:60px;bottom:60px;z-index:5;
+  width:340px;height:340px;
+  background:var(--ink);
+  border:4px solid var(--ink);
+  transform:rotate(-3deg);
+  box-shadow:14px 14px 0 var(--lime),22px 22px 0 var(--ink);
+  overflow:hidden;
+}
+.menu-char-art{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 30% 35%,#ff80b5 0%,transparent 45%),
+    radial-gradient(circle at 70% 70%,#92e7ff 0%,transparent 50%),
+    repeating-linear-gradient(45deg,rgba(246,236,214,.08) 0 1px,transparent 1px 8px),
+    linear-gradient(160deg,#3a2666,#15131a);
+}
+.menu-char-tag{
+  position:absolute;left:14px;bottom:14px;font-family:Anton;font-size:60px;color:transparent;-webkit-text-stroke:1.5px rgba(246,236,214,.3);line-height:.85;
+}
+.menu-char-tag b{display:block}
+.menu-char-label{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-family:"JetBrains Mono";font-size:10px;letter-spacing:.32em;color:rgba(246,236,214,.55);
+  border:1px dashed rgba(246,236,214,.3);padding:8px 12px;
+  text-align:center;
+}
+.menu-char-label b{font-family:Anton;font-size:14px;letter-spacing:.18em;color:var(--lime);display:block}
+.menu-char-name{
+  position:absolute;left:-14px;top:14px;
+  background:var(--lime);color:var(--ink);border:2px solid var(--ink);
+  padding:6px 12px;font-family:Anton;font-size:14px;letter-spacing:.12em;
+  transform:rotate(-6deg);box-shadow:3px 3px 0 var(--ink);
+}
+
+/* news ribbon */
+.menu-news{
+  position:absolute;left:430px;bottom:80px;right:60px;z-index:6;
+  display:flex;flex-direction:column;gap:10px;
+}
+.menu-news-card{
+  display:grid;grid-template-columns:80px 1fr auto;gap:14px;align-items:center;
+  background:var(--paper);border:2px solid var(--ink);padding:10px 14px;
+  box-shadow:4px 4px 0 var(--ink);
+}
+.menu-news-date{
+  background:var(--ink);color:var(--cream);padding:6px 8px;text-align:center;
+}
+.menu-news-date b{font-family:Anton;font-size:22px;display:block;line-height:1}
+.menu-news-date span{font-family:"JetBrains Mono";font-size:9px;letter-spacing:.2em}
+.menu-news-text .t{font-family:"Zen Kaku Gothic New";font-weight:700;font-size:14px;color:var(--ink)}
+.menu-news-text .s{font-family:"JetBrains Mono";font-size:10px;letter-spacing:.18em;color:var(--pencil);margin-top:2px}
+.menu-news-tag{font-family:Anton;font-size:13px;background:var(--cyan);color:var(--ink);border:2px solid var(--ink);padding:3px 8px;letter-spacing:.12em}
+.menu-news-tag.new{background:var(--lime)}
+
+/* sticker doodles */
+.menu-doodle{position:absolute;z-index:8;pointer-events:none;font-family:Anton;text-transform:uppercase}
+.doodle-1{right:60px;top:170px;color:var(--purple);font-size:18px;transform:rotate(8deg);
+  background:var(--lime);border:2px solid var(--ink);padding:4px 8px;box-shadow:3px 3px 0 var(--ink);font-family:"Zen Kaku Gothic New";letter-spacing:.18em}
+.doodle-2{left:480px;top:120px;font-family:"Shippori Mincho";font-size:48px;color:var(--purple);transform:rotate(-8deg);font-weight:800}
+.doodle-3{right:80px;bottom:30px;color:var(--ink);font-family:Caveat;font-size:28px;transform:rotate(-3deg)}
+
+/* ── 2. DECK BUILDER ──────────────────────────────────────── */
+.deck{
+  position:relative;width:1280px;height:780px;
+  background:var(--cream);
+  display:grid;grid-template-columns:300px 1fr 320px;gap:0;
+  overflow:hidden;
+}
+
+/* notebook spine */
+.deck::before{
+  content:"";position:absolute;left:286px;right:328px;top:0;bottom:0;
+  background-image:repeating-linear-gradient(0deg,rgba(21,19,26,.05) 0 1px,transparent 1px 22px);
+}
+.deck::after{
+  content:"";position:absolute;left:86px;top:0;bottom:0;width:1px;background:var(--pink);opacity:.4;
+}
+
+/* punch holes */
+.deck-spine{
+  position:absolute;left:0;top:0;bottom:0;width:38px;z-index:5;
+  display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:30px 0;
+}
+.deck-spine i{
+  width:14px;height:14px;border-radius:50%;
+  background:#0e0c14;
+  box-shadow:0 0 0 3px var(--cream);
+}
+
+/* left binder tab list */
+.deck-tabs{
+  position:relative;padding:32px 18px 18px 50px;border-right:2px solid var(--ink);
+  display:flex;flex-direction:column;gap:8px;background:var(--cream-2);
+  z-index:2;
+}
+.deck-tabs-head{
+  font-family:Anton;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--pencil);margin-bottom:6px;
+}
+.deck-tab{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 12px;
+  border:2px solid var(--ink);background:var(--paper);
+  font-family:Anton;font-size:15px;letter-spacing:.06em;text-transform:uppercase;
+  position:relative;
+}
+.deck-tab .ct{font-family:"JetBrains Mono";font-size:11px;color:var(--pencil)}
+.deck-tab.active{background:var(--pink);color:#fff;box-shadow:4px 4px 0 var(--ink)}
+.deck-tab.active .ct{color:#fff}
+.deck-tab.active::before{content:"";position:absolute;left:-10px;top:50%;transform:translateY(-50%);width:0;height:0;border:6px solid transparent;border-right-color:var(--pink)}
+.deck-tab.lime{background:var(--lime)}
+.deck-tab.cyan{background:var(--cyan)}
+
+/* mood / club badges */
+.deck-clubs{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.club-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 10px;border:2px solid var(--ink);border-radius:999px;background:var(--paper);
+  font-family:"Zen Kaku Gothic New";font-weight:700;font-size:11px;letter-spacing:.06em;
+}
+.club-badge i{width:8px;height:8px;border-radius:50%}
+.club-badge.on{background:var(--lime)}
+.club-badge.on i{background:var(--ink)}
+
+.deck-stats{margin-top:18px;display:flex;flex-direction:column;gap:6px}
+.deck-stat-row{display:flex;justify-content:space-between;font-family:"JetBrains Mono";font-size:11px}
+.deck-stat-row b{font-family:Anton;font-size:14px;color:var(--ink)}
+.deck-stat-row.warn b{color:var(--red)}
+
+/* center: card library grid */
+.deck-grid{
+  position:relative;padding:32px 28px;display:flex;flex-direction:column;gap:14px;z-index:1;
+  overflow:hidden;
+}
+.deck-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
+.deck-head-l{display:flex;flex-direction:column;gap:4px}
+.deck-head-l .kicker{font-family:"JetBrains Mono";font-size:10.5px;letter-spacing:.32em;color:var(--pencil);text-transform:uppercase}
+.deck-head-l h2{margin:0;font-family:Anton;font-size:54px;line-height:.9;letter-spacing:.005em}
+.deck-head-l h2 em{color:var(--pink);font-style:normal}
+.deck-head-l h2 .h{background:var(--lime);padding:0 8px;border:2px solid var(--ink)}
+.deck-head-r{display:flex;gap:8px}
+.deck-search{
+  display:flex;align-items:center;gap:8px;background:var(--paper);border:2px solid var(--ink);
+  padding:6px 10px;font-family:"JetBrains Mono";font-size:11px;letter-spacing:.18em;color:var(--pencil);
+  box-shadow:3px 3px 0 var(--ink);
+}
+.deck-sort-btn{
+  background:var(--cyan);border:2px solid var(--ink);padding:6px 12px;font-family:Anton;font-size:13px;letter-spacing:.12em;
+  box-shadow:3px 3px 0 var(--ink);
+}
+
+.deck-cards{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;flex:1;min-height:0;
+}
+
+.gcard{
+  position:relative;border:2px solid var(--ink);background:var(--paper);
+  display:grid;grid-template-rows:auto 1fr auto;gap:0;
+  box-shadow:4px 4px 0 var(--ink);
+  transition:transform .15s;
+  overflow:hidden;
+}
+.gcard:hover{transform:translate(-2px,-2px)}
+.gcard.in-deck{box-shadow:4px 4px 0 var(--lime),4px 4px 0 4px var(--ink)}
+.gcard-head{display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-bottom:2px solid var(--ink)}
+.gcard-cost{
+  width:24px;height:24px;border-radius:50%;background:var(--pink);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:14px;
+  border:2px solid var(--ink);
+}
+.gcard-cost.cyan{background:var(--cyan);color:var(--ink)}
+.gcard-cost.lime{background:var(--lime);color:var(--ink)}
+.gcard-cost.purple{background:var(--purple);color:#fff}
+.gcard-name{font-family:"Zen Kaku Gothic New";font-weight:700;font-size:12px;line-height:1.05;flex:1;text-align:center;padding:0 6px}
+.gcard-rare{font-family:"JetBrains Mono";font-size:9px;color:var(--pencil);letter-spacing:.18em}
+.gcard-art{
+  position:relative;aspect-ratio:1;
+  background:
+    radial-gradient(circle at 30% 30%,var(--art-1,#ffd6e7),transparent 60%),
+    radial-gradient(circle at 70% 70%,var(--art-2,#cbeaff),transparent 60%),
+    var(--cream-2);
+  border-bottom:2px solid var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.gcard-art::before{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(21,19,26,.18) 1px,transparent 1.4px);
+  background-size:5px 5px;
+  mask-image:linear-gradient(135deg,#000,transparent);
+}
+.gcard-art-glyph{
+  font-family:"Shippori Mincho";font-size:48px;color:rgba(21,19,26,.18);font-weight:800;
+}
+.gcard-art-tag{
+  position:absolute;left:6px;bottom:6px;
+  font-family:"JetBrains Mono";font-size:8.5px;letter-spacing:.2em;color:var(--pencil);
+}
+.gcard-foot{display:flex;justify-content:space-between;align-items:center;padding:5px 8px;font-family:"JetBrains Mono";font-size:9.5px;letter-spacing:.1em;color:var(--pencil)}
+.gcard-foot .suit{font-family:Anton;font-size:11px;letter-spacing:.18em;color:var(--ink)}
+.gcard-corner{
+  position:absolute;top:-6px;right:-6px;width:26px;height:26px;background:var(--lime);
+  border:2px solid var(--ink);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:11px;color:var(--ink);
+  transform:rotate(8deg);
+}
+.gcard.in-deck .gcard-corner{background:var(--lime)}
+.gcard.in-deck::after{
+  content:"IN DECK";position:absolute;top:8px;left:-6px;background:var(--ink);color:var(--lime);
+  padding:2px 6px;font-family:Anton;font-size:9px;letter-spacing:.18em;transform:rotate(-8deg);
+}
+
+/* right: deck list (binder rings) */
+.deck-list{
+  position:relative;padding:32px 18px 18px 28px;border-left:2px solid var(--ink);
+  display:flex;flex-direction:column;gap:10px;background:var(--cream-2);z-index:2;
+}
+.deck-list-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  padding-bottom:8px;border-bottom:2px dashed var(--ink);
+}
+.deck-list-head h3{margin:0;font-family:Anton;font-size:30px;line-height:.9}
+.deck-list-head .ct{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.18em;color:var(--pencil)}
+.deck-list-head .ct b{font-family:Anton;font-size:18px;color:var(--ink)}
+
+.deck-row{
+  display:grid;grid-template-columns:24px 1fr auto 22px;gap:8px;align-items:center;
+  padding:7px 10px;background:var(--paper);border:1.5px solid var(--ink);
+}
+.deck-row .c{
+  width:22px;height:22px;border-radius:50%;background:var(--pink);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:12px;border:1.5px solid var(--ink);
+}
+.deck-row .c.cyan{background:var(--cyan);color:var(--ink)}
+.deck-row .c.lime{background:var(--lime);color:var(--ink)}
+.deck-row .c.purple{background:var(--purple);color:#fff}
+.deck-row .n{font-family:"Zen Kaku Gothic New";font-weight:700;font-size:12px}
+.deck-row .x{font-family:"JetBrains Mono";font-size:10px;color:var(--pencil)}
+.deck-row .rm{
+  width:22px;height:22px;border:1.5px solid var(--ink);background:var(--cream);font-family:Anton;font-size:11px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+.deck-cta{
+  margin-top:auto;display:flex;gap:8px;
+}
+.deck-cta button{
+  flex:1;padding:12px 14px;border:2.5px solid var(--ink);font-family:Anton;font-size:15px;letter-spacing:.12em;
+  box-shadow:5px 5px 0 var(--ink);
+}
+.deck-cta .save{background:var(--lime);color:var(--ink)}
+.deck-cta .equip{background:var(--pink);color:#fff}
+
+.deck-stickies{position:absolute;right:14px;top:14px;display:flex;flex-direction:column;gap:8px;z-index:6}
+.sticky{
+  width:120px;background:var(--lime);border:2px solid var(--ink);padding:8px 10px;
+  font-family:"Zen Kaku Gothic New";font-weight:700;font-size:11px;
+  box-shadow:3px 3px 0 var(--ink);transform:rotate(3deg);
+}
+.sticky.pink{background:var(--pink-2);transform:rotate(-4deg)}
+.sticky.cyan{background:var(--cyan-2);transform:rotate(2deg)}
+.sticky b{display:block;font-family:Anton;font-size:13px;letter-spacing:.1em;margin-bottom:2px}
+
+/* ── 3. BATTLE ─────────────────────────────────────────── */
+.battle{
+  position:relative;width:1280px;height:780px;
+  background:
+    linear-gradient(180deg,#ff80b5 0%,#ff3d8b 30%,var(--purple) 70%,#1a0e2a 100%);
+  overflow:hidden;color:var(--cream);
+}
+.battle .speed-lines{--cx:50%;--cy:60%;opacity:.55}
+.battle .tex-noise{opacity:.22}
+
+/* manga panel for opponent */
+.bt-foe{
+  position:absolute;left:50%;top:32px;transform:translateX(-50%) skew(-4deg);
+  width:760px;height:240px;background:var(--ink);border:4px solid var(--cream);
+  box-shadow:0 14px 0 var(--lime);
+  overflow:hidden;display:flex;
+}
+.bt-foe-art{position:relative;flex:1;
+  background:
+    radial-gradient(circle at 60% 50%,#ff80b5,transparent 50%),
+    radial-gradient(circle at 30% 30%,#92e7ff 0%,transparent 40%),
+    linear-gradient(140deg,#3a1f5f,#0c0712);
+  display:flex;align-items:center;justify-content:center;
+}
+.bt-foe-art::before{
+  content:"";position:absolute;inset:0;background:repeating-linear-gradient(20deg,rgba(246,236,214,.05) 0 1px,transparent 1px 12px);
+}
+.bt-foe-art .glyph{font-family:"Shippori Mincho";font-size:120px;color:rgba(246,236,214,.18);font-weight:800;line-height:1}
+.bt-foe-art .lab{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-family:"JetBrains Mono";font-size:10px;letter-spacing:.32em;color:rgba(246,236,214,.55);
+  border:1px dashed rgba(246,236,214,.3);padding:6px 10px;text-align:center;
+}
+.bt-foe-art .lab b{display:block;font-family:Anton;font-size:14px;color:var(--lime);letter-spacing:.18em}
+
+.bt-foe-info{
+  width:300px;padding:18px 18px 16px;background:var(--cream);color:var(--ink);
+  display:flex;flex-direction:column;gap:10px;transform:skew(4deg);
+}
+.bt-foe-name{font-family:Anton;font-size:36px;line-height:.95}
+.bt-foe-jp{font-family:"Shippori Mincho";font-size:16px;letter-spacing:.18em;color:var(--purple);font-weight:800}
+.bt-foe-tags{display:flex;gap:6px;flex-wrap:wrap}
+.bt-tag{font-family:Anton;font-size:11px;letter-spacing:.12em;padding:3px 7px;border:2px solid var(--ink)}
+.bt-tag.pink{background:var(--pink);color:#fff}
+.bt-tag.cyan{background:var(--cyan)}
+.bt-tag.lime{background:var(--lime)}
+
+/* speech bubble */
+.bt-bubble{
+  position:absolute;left:60px;top:60px;z-index:6;
+  background:var(--cream);color:var(--ink);
+  border:3px solid var(--ink);padding:10px 14px;max-width:200px;
+  font-family:"Zen Kaku Gothic New";font-weight:700;font-size:13px;line-height:1.3;
+  transform:rotate(-5deg);
+  box-shadow:5px 5px 0 var(--ink);
+}
+.bt-bubble::after{
+  content:"";position:absolute;right:-20px;bottom:-6px;
+  width:0;height:0;border:14px solid transparent;border-left-color:var(--cream);transform:rotate(-12deg);
+}
+
+/* turn marker top right */
+.bt-turn{
+  position:absolute;right:48px;top:48px;z-index:7;
+  display:flex;flex-direction:column;align-items:flex-end;gap:6px;
+}
+.bt-turn-tag{
+  background:var(--lime);color:var(--ink);border:3px solid var(--ink);padding:4px 12px;
+  font-family:Anton;font-size:14px;letter-spacing:.18em;box-shadow:4px 4px 0 var(--ink);transform:rotate(4deg);
+}
+.bt-turn-num{
+  background:var(--ink);color:var(--lime);padding:6px 14px;font-family:Anton;font-size:24px;letter-spacing:.06em;
+  border:3px solid var(--cream);
+}
+
+/* HUD bars left */
+.bt-hud-left{
+  position:absolute;left:28px;top:300px;z-index:5;width:300px;
+  background:var(--cream);border:3px solid var(--ink);padding:14px;
+  box-shadow:6px 6px 0 var(--ink);
+}
+.bt-hud-row{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.bt-hud-row:last-child{margin-bottom:0}
+.bt-hud-lbl{display:flex;justify-content:space-between;font-family:Anton;font-size:12px;letter-spacing:.18em;color:var(--ink)}
+.bt-hud-lbl em{color:var(--pink);font-style:normal}
+.bt-name-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.bt-name-row .av{
+  width:42px;height:42px;border:2.5px solid var(--ink);background:var(--cyan);
+  display:flex;align-items:center;justify-content:center;font-family:Anton;font-size:22px;
+}
+.bt-name-row .nm{font-family:Anton;font-size:18px;line-height:1}
+.bt-name-row .sub{font-family:"JetBrains Mono";font-size:10px;color:var(--pencil);letter-spacing:.18em;margin-top:2px}
+
+/* mood/edge tags */
+.bt-mood{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.mood{font-family:Anton;font-size:11px;letter-spacing:.12em;padding:3px 7px;border:2px solid var(--ink);background:var(--paper)}
+.mood.lime{background:var(--lime)}
+.mood.pink{background:var(--pink);color:#fff}
+.mood.cyan{background:var(--cyan)}
+
+/* enemy hp top center small */
+.bt-foe-bars{
+  position:absolute;left:50%;top:282px;transform:translateX(-50%);width:560px;z-index:5;
+  display:flex;gap:10px;
+}
+.bt-foe-bars .pbar{flex:1;background:rgba(0,0,0,.35);border-color:var(--cream)}
+
+/* central card spotlight */
+.bt-center{
+  position:absolute;left:50%;top:330px;transform:translate(-50%,0);z-index:8;
+  width:200px;height:280px;
+}
+.bt-center::before{
+  content:"";position:absolute;inset:-60px;
+  background:radial-gradient(circle at center,rgba(246,236,214,.25),transparent 60%);
+  border-radius:50%;
+}
+.bt-center-card{
+  position:relative;width:100%;height:100%;
+  background:var(--paper);border:4px solid var(--ink);
+  display:grid;grid-template-rows:auto 1fr auto;
+  box-shadow:0 24px 0 var(--ink),12px 12px 0 var(--lime);
+  overflow:hidden;
+  transform:rotate(-3deg);
+}
+.bt-center-card .gcard-head{padding:8px 10px}
+.bt-center-card .gcard-cost{width:30px;height:30px;font-size:18px}
+.bt-center-card .gcard-name{font-size:16px}
+.bt-center-card .gcard-art{aspect-ratio:auto}
+.bt-center-card .gcard-art-glyph{font-size:80px}
+.bt-center-card .body{padding:8px 10px;border-top:2px solid var(--ink);font-family:"Zen Kaku Gothic New";font-weight:700;font-size:11px;line-height:1.35;background:var(--cream-2)}
+.bt-center-card .body em{color:var(--pink);font-style:normal}
+
+.bt-impact{
+  position:absolute;left:48%;top:46%;z-index:9;
+  font-family:Anton;font-size:96px;color:var(--lime);
+  transform:rotate(-12deg);
+  -webkit-text-stroke:5px var(--ink);
+  text-shadow:8px 8px 0 var(--pink);
+  letter-spacing:.02em;
+  pointer-events:none;
+}
+
+/* hand */
+.bt-hand{
+  position:absolute;left:0;right:0;bottom:0;height:220px;z-index:6;
+  display:flex;justify-content:center;align-items:flex-end;
+  padding-bottom:20px;
+}
+.bt-hand-rail{position:relative;width:760px;height:100%}
+.hcard{
+  position:absolute;bottom:0;width:140px;height:200px;
+  background:var(--paper);border:3px solid var(--ink);
+  display:grid;grid-template-rows:auto 1fr auto;
+  box-shadow:6px 6px 0 var(--ink);
+  transform-origin:50% 110%;
+  overflow:hidden;
+}
+.hcard.h1{left:30px;transform:rotate(-12deg)}
+.hcard.h2{left:170px;transform:rotate(-6deg) translateY(-6px)}
+.hcard.h3{left:310px;transform:rotate(0deg) translateY(-12px)}
+.hcard.h4{left:450px;transform:rotate(6deg) translateY(-6px)}
+.hcard.h5{left:590px;transform:rotate(12deg)}
+
+.hcard .gcard-head{padding:5px 7px;border-bottom:2px solid var(--ink)}
+.hcard .gcard-cost{width:22px;height:22px;font-size:13px}
+.hcard .gcard-name{font-size:11px}
+.hcard .gcard-art{border-bottom:2px solid var(--ink)}
+.hcard .gcard-art-glyph{font-size:36px}
+
+/* end turn button */
+.bt-end{
+  position:absolute;right:48px;bottom:36px;z-index:9;
+  display:flex;flex-direction:column;gap:8px;align-items:flex-end;
+}
+.bt-end-btn{
+  background:var(--lime);color:var(--ink);border:4px solid var(--ink);
+  padding:14px 22px;font-family:Anton;font-size:24px;letter-spacing:.12em;
+  box-shadow:6px 6px 0 var(--ink);transform:rotate(-3deg);
+  display:flex;align-items:center;gap:10px;
+}
+.bt-energy{
+  display:flex;align-items:center;gap:8px;background:var(--cream);color:var(--ink);
+  border:3px solid var(--ink);padding:6px 12px;font-family:Anton;font-size:14px;letter-spacing:.12em;
+  box-shadow:4px 4px 0 var(--ink);
+}
+.bt-energy .star{color:var(--pink)}
+
+/* ── 4. RESULT ─────────────────────────────────────────── */
+.result{
+  position:relative;width:1280px;height:780px;
+  background:
+    radial-gradient(ellipse at 50% 100%,#ffb380 0%,transparent 60%),
+    linear-gradient(180deg,#fce0a8 0%,#ffb19a 60%,#a16cff 100%);
+  overflow:hidden;
+}
+.result .tex-halftone{opacity:.5}
+.result .tex-noise{opacity:.2}
+/* sun rays */
+.result-rays{
+  position:absolute;left:50%;bottom:-200px;transform:translateX(-50%);
+  width:1600px;height:1200px;
+  background:conic-gradient(from 90deg at 50% 100%,
+    transparent 0,rgba(255,255,255,.45) 1deg,transparent 2deg,
+    transparent 14deg,rgba(255,255,255,.4) 15deg,transparent 16deg,
+    transparent 28deg,rgba(255,255,255,.45) 29deg,transparent 30deg,
+    transparent 42deg,rgba(255,255,255,.4) 43deg,transparent 44deg,
+    transparent 56deg,rgba(255,255,255,.45) 57deg,transparent 58deg,
+    transparent 70deg,rgba(255,255,255,.35) 71deg,transparent 72deg,
+    transparent 84deg,rgba(255,255,255,.4) 85deg,transparent 86deg,
+    transparent 98deg,rgba(255,255,255,.4) 99deg,transparent 100deg,
+    transparent 112deg,rgba(255,255,255,.35) 113deg,transparent 114deg,
+    transparent 126deg,rgba(255,255,255,.4) 127deg,transparent 128deg,
+    transparent 140deg,rgba(255,255,255,.45) 141deg,transparent 142deg,
+    transparent 154deg,rgba(255,255,255,.4) 155deg,transparent 156deg,
+    transparent 168deg,rgba(255,255,255,.4) 169deg,transparent 170deg,
+    transparent 180deg);
+  mix-blend-mode:screen;opacity:.55;
+}
+
+.result-tape-top{position:absolute;left:0;right:0;top:0;height:36px;background:repeating-linear-gradient(45deg,var(--pink) 0 8px,#ff5fa3 8px 16px);border-bottom:3px solid var(--ink)}
+.result-tape-top::after{content:"VICTORY · 勝利 · GOOD TIME · CLUB MEMORY · VICTORY · 勝利 · ";position:absolute;left:0;top:0;height:100%;display:flex;align-items:center;padding:0 16px;font-family:Anton;font-size:14px;letter-spacing:.32em;color:var(--ink);white-space:nowrap}
+
+/* polaroid */
+.polaroid{
+  position:absolute;left:60px;top:96px;
+  width:520px;background:#fff;padding:14px 14px 60px;
+  border:1px solid rgba(0,0,0,.1);
+  box-shadow:0 24px 60px rgba(0,0,0,.35);
+  transform:rotate(-4deg);
+}
+.polaroid::before{
+  content:"";position:absolute;left:50%;top:-20px;transform:translateX(-50%) rotate(2deg);
+  width:130px;height:36px;background:repeating-linear-gradient(45deg,var(--cyan) 0 6px,var(--cyan-2) 6px 12px);
+  border:1px solid rgba(0,0,0,.15);box-shadow:0 4px 8px rgba(0,0,0,.25);
+}
+.polaroid-photo{
+  position:relative;width:100%;height:380px;background:var(--ink);
+  background-image:
+    radial-gradient(circle at 30% 70%,rgba(255,128,181,.5),transparent 50%),
+    radial-gradient(circle at 75% 35%,rgba(146,231,255,.5),transparent 55%),
+    linear-gradient(160deg,#3a1f5f,#0c0712);
+  overflow:hidden;
+}
+.polaroid-photo::before{
+  content:"";position:absolute;inset:0;background:repeating-linear-gradient(20deg,rgba(246,236,214,.06) 0 1px,transparent 1px 14px);
+}
+.polaroid-photo .label{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-family:"JetBrains Mono";font-size:11px;letter-spacing:.32em;color:rgba(246,236,214,.6);
+  border:1px dashed rgba(246,236,214,.4);padding:8px 14px;text-align:center;
+}
+.polaroid-photo .label b{display:block;font-family:Anton;font-size:14px;letter-spacing:.18em;color:var(--lime);margin-bottom:2px}
+.polaroid-photo .stamp{
+  position:absolute;right:14px;top:14px;
+  font-family:Anton;font-size:18px;letter-spacing:.18em;color:rgba(246,236,214,.7);
+  border:2px solid rgba(246,236,214,.5);padding:3px 8px;transform:rotate(4deg);
+}
+.polaroid-cap{
+  position:absolute;left:14px;right:14px;bottom:14px;font-family:Caveat;font-size:30px;color:var(--ink);line-height:.9;
+}
+.polaroid-cap small{display:block;font-family:"JetBrains Mono";font-size:10px;letter-spacing:.2em;color:var(--pencil);margin-top:4px}
+
+/* victory stamp */
+.result-stamp{
+  position:absolute;left:240px;top:60px;z-index:6;
+  width:230px;height:230px;border:8px solid var(--red);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  transform:rotate(-12deg);
+  background:transparent;
+  font-family:"Shippori Mincho";color:var(--red);font-weight:800;
+  box-shadow:inset 0 0 0 4px var(--cream);
+  filter:drop-shadow(0 2px 0 rgba(0,0,0,.15));
+  opacity:.92;
+}
+.result-stamp::after{
+  content:"";position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.55) 1px,transparent 1.4px);
+  background-size:6px 6px;mix-blend-mode:screen;opacity:.7;
+}
+.result-stamp .jp{font-size:96px;line-height:.85;letter-spacing:.05em}
+.result-stamp .en{font-family:Anton;font-size:18px;letter-spacing:.32em;margin-top:6px}
+
+/* right panel */
+.result-card{
+  position:absolute;right:60px;top:80px;
+  width:520px;background:var(--cream);
+  border:4px solid var(--ink);padding:24px 28px 22px;
+  box-shadow:14px 14px 0 var(--ink);
+}
+.result-card .kick{font-family:"JetBrains Mono";font-size:11px;letter-spacing:.32em;color:var(--pencil);text-transform:uppercase}
+.result-card .kick em{color:var(--pink);font-style:normal}
+.result-card h2{margin:6px 0 2px;font-family:Anton;font-size:74px;line-height:.86;letter-spacing:.005em}
+.result-card h2 em{color:var(--pink);font-style:normal}
+.result-card h2 .h{background:var(--lime);padding:0 10px;border:3px solid var(--ink);display:inline-block}
+.result-card .jp-line{font-family:"Shippori Mincho";font-size:24px;letter-spacing:.18em;color:var(--purple);font-weight:800}
+.result-card .body{
+  margin-top:14px;padding:12px 0;border-top:2px dashed var(--ink);border-bottom:2px dashed var(--ink);
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.r-stat{display:flex;flex-direction:column;gap:2px}
+.r-stat .l{font-family:"JetBrains Mono";font-size:10px;letter-spacing:.2em;color:var(--pencil);text-transform:uppercase}
+.r-stat .v{font-family:Anton;font-size:30px;line-height:1}
+.r-stat .v em{color:var(--pink);font-style:normal}
+.r-stat .v.acid{color:var(--purple)}
+
+.result-rewards{
+  margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;
+}
+.r-reward{
+  position:relative;padding:8px 10px;background:var(--paper);border:2px solid var(--ink);
+  font-family:"Zen Kaku Gothic New";font-weight:700;font-size:12px;display:flex;align-items:center;gap:8px;
+}
+.r-reward .ic{
+  width:26px;height:26px;display:flex;align-items:center;justify-content:center;
+  font-family:Anton;font-size:14px;
+  border:2px solid var(--ink);
+}
+.r-reward .ic.p{background:var(--pink);color:#fff}
+.r-reward .ic.c{background:var(--cyan)}
+.r-reward .ic.l{background:var(--lime)}
+.r-reward .x{margin-left:auto;font-family:"JetBrains Mono";font-size:11px;color:var(--pencil)}
+
+.result-cta{margin-top:16px;display:flex;gap:10px}
+.result-cta button{
+  flex:1;padding:14px 14px;border:3px solid var(--ink);font-family:Anton;font-size:18px;letter-spacing:.1em;
+  box-shadow:6px 6px 0 var(--ink);
+}
+.result-cta .next{background:var(--pink);color:#fff}
+.result-cta .menu{background:var(--cream-2);color:var(--ink)}
+
+/* diary doodle */
+.result-diary{
+  position:absolute;right:90px;bottom:60px;
+  font-family:Caveat;font-size:24px;color:var(--ink);transform:rotate(-3deg);
+  background:var(--lime);border:2.5px solid var(--ink);padding:8px 14px;
+  box-shadow:5px 5px 0 var(--ink);
+  max-width:320px;
+}
+.result-diary b{display:block;font-family:Anton;font-size:13px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:2px}
+
+/* paper plane sticker */
+.result-plane{
+  position:absolute;left:200px;bottom:80px;
+  width:120px;height:80px;background:var(--cyan);border:3px solid var(--ink);
+  clip-path:polygon(0 0,100% 50%,0 100%,30% 50%);
+  transform:rotate(-12deg);box-shadow:5px 5px 0 var(--ink);
+}
+
+/* ticket sticker */
+.result-ticket{
+  position:absolute;left:600px;bottom:130px;width:200px;background:var(--cream);border:2.5px solid var(--ink);
+  transform:rotate(8deg);box-shadow:5px 5px 0 var(--ink);
+  font-family:"JetBrains Mono";font-size:10px;letter-spacing:.18em;color:var(--ink);
+  padding:0;
+}
+.result-ticket .ticket-head{background:var(--ink);color:var(--cream);padding:4px 10px;font-family:Anton;font-size:13px;letter-spacing:.18em;display:flex;justify-content:space-between}
+.result-ticket .ticket-body{padding:8px 10px}
+.result-ticket .ticket-body b{font-family:Anton;font-size:16px;color:var(--ink);letter-spacing:.05em;display:block}
+.result-ticket .ticket-perforation{
+  height:8px;background-image:radial-gradient(circle,var(--cream) 3px,transparent 3.4px);background-size:10px 10px;background-position:5px center;
+  border-top:1px dashed var(--ink);border-bottom:1px dashed var(--ink);
+}
+
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-head">
+    <div>
+      <h1>AFTER<span class="star">★</span><em>CLUB</em></h1>
+      <div class="sub">CARD SOCIETY · UI EXPLORATION · 4 SCREENS</div>
+    </div>
+    <div class="meta">
+      <span class="pill">DESIGN R1</span>
+      <span>SHOUJO/SHŌNEN HYBRID · NEO-POP</span>
+      <span>1280 × 780</span>
+    </div>
+  </div>
+
+  <!-- ════════ MAIN MENU ═══════════════════════════════════════ -->
+  <section class="frame">
+    <div class="frame-tag"><em>01</em>MAIN MENU · KEY VISUAL</div>
+    <div class="frame-side"><i></i><i></i><i></i></div>
+    <div class="menu">
+      <div class="tex-grid"></div>
+      <div class="menu-slash"></div>
+      <div class="tex-halftone"></div>
+      <div class="tex-noise"></div>
+
+      <!-- crest -->
+      <div class="menu-crest">
+        <div class="menu-crest-mark"><span>放</span></div>
+        <div class="menu-crest-text">
+          <span class="jp">放課後・倶楽部</span>
+          <span class="en">AFTER★CLUB ACADEMY</span>
+        </div>
+      </div>
+
+      <!-- HUD -->
+      <div class="menu-hud">
+        <div class="pill"><span>LV</span><b>17</b></div>
+        <div class="pill lime"><span>★</span><b>2,840</b></div>
+        <div class="pill cyan"><span>¥</span><b>14,920</b></div>
+        <div class="pill"><span>◇</span><b>03/05</b></div>
+      </div>
+
+      <!-- doodles -->
+      <div class="menu-doodle doodle-1">NEW EVENT</div>
+      <div class="menu-doodle doodle-2">青春</div>
+
+      <!-- LOGO -->
+      <div class="menu-logo-wrap">
+        <span class="menu-logo-jp">青春カード社</span>
+        <div class="menu-logo">
+          <span class="row">AFTER<span class="star">★</span></span>
+          <span class="row strike-row">CLUB</span>
+          <span class="row"><span class="o">C</span><span class="swap">A</span>RD<span class="star" style="font-size:64px;color:var(--lime);transform:translateY(-12px) rotate(-12deg)">★</span></span>
+          <span class="row" style="font-size:72px;color:var(--purple)">SOCIETY</span>
+        </div>
+        <div class="menu-tagline">— a club for kids the bell forgot.</div>
+      </div>
+
+      <!-- CTA -->
+      <div class="menu-cta">
+        <button class="menu-btn primary">
+          <span class="num">01</span>
+          <span class="label">Continue<span class="sub">CHAPTER 03 — 5TH PERIOD</span></span>
+          <span class="arrow">→</span>
+        </button>
+        <button class="menu-btn lime">
+          <span class="num">02</span>
+          <span class="label">Quick Match<span class="sub">RANKED · ROOFTOP CIRCUIT</span></span>
+          <span class="arrow">→</span>
+        </button>
+        <button class="menu-btn cyan">
+          <span class="num">03</span>
+          <span class="label">Deck Builder<span class="sub">42 / 60 CARDS COLLECTED</span></span>
+          <span class="arrow">→</span>
+        </button>
+        <button class="menu-btn purple">
+          <span class="num">04</span>
+          <span class="label">Club Room<span class="sub">5 MEMBERS · 2 ONLINE</span></span>
+          <span class="arrow">→</span>
+        </button>
+        <button class="menu-btn dotted">
+          <span class="num">05</span>
+          <span class="label">Settings & Memos<span class="sub">SAVE · AUDIO · CREDITS</span></span>
+          <span class="arrow">→</span>
+        </button>
+      </div>
+
+      <!-- character placeholder -->
+      <div class="menu-char">
+        <div class="menu-char-art"></div>
+        <div class="menu-char-tag"><b>AFTER</b><b>CLUB</b></div>
+        <div class="menu-char-name">★ TODAY'S MC · REN A.</div>
+        <div class="menu-char-label">
+          <b>KEY VISUAL · DROP HERE</b>
+          <span>1024 × 1280 · CHARACTER ART</span>
+        </div>
+      </div>
+
+      <!-- news ribbons -->
+      <div class="menu-news">
+        <div class="menu-news-card">
+          <div class="menu-news-date"><b>11</b><span>NOV</span></div>
+          <div class="menu-news-text"><div class="t">Cultural Festival event drops — limited rooftop deck</div><div class="s">EVENT · 2 DAYS LEFT</div></div>
+          <div class="menu-news-tag new">NEW</div>
+        </div>
+        <div class="menu-news-card">
+          <div class="menu-news-date"><b>09</b><span>NOV</span></div>
+          <div class="menu-news-text"><div class="t">Patch 1.4 — three new club moves & balance pass</div><div class="s">UPDATE · LIVE NOW</div></div>
+          <div class="menu-news-tag">PATCH</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ DECK BUILDER ════════════════════════════════════ -->
+  <section class="frame">
+    <div class="frame-tag"><em>02</em>DECK BUILDER · BINDER</div>
+    <div class="frame-side"><i></i><i></i><i></i></div>
+    <div class="deck">
+      <div class="deck-spine"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+      <!-- LEFT TABS -->
+      <div class="deck-tabs">
+        <div class="deck-tabs-head">FILTER · 種別</div>
+        <div class="deck-tab active"><span>All Cards</span><span class="ct">60</span></div>
+        <div class="deck-tab"><span>Strike</span><span class="ct">22</span></div>
+        <div class="deck-tab"><span>Guard</span><span class="ct">14</span></div>
+        <div class="deck-tab"><span>Bonds</span><span class="ct">18</span></div>
+        <div class="deck-tab"><span>Memory</span><span class="ct">06</span></div>
+
+        <div class="deck-tabs-head" style="margin-top:14px">CLUB · 部活</div>
+        <div class="deck-clubs">
+          <span class="club-badge on"><i></i> ART</span>
+          <span class="club-badge"><i></i> MUSIC</span>
+          <span class="club-badge on"><i></i> TRACK</span>
+          <span class="club-badge"><i></i> LIT</span>
+          <span class="club-badge"><i></i> JUDO</span>
+          <span class="club-badge on"><i></i> RADIO</span>
+        </div>
+
+        <div class="deck-tabs-head" style="margin-top:14px">SUMMARY</div>
+        <div class="deck-stats">
+          <div class="deck-stat-row"><span>Average cost</span><b>1.8</b></div>
+          <div class="deck-stat-row"><span>Strike count</span><b>14</b></div>
+          <div class="deck-stat-row"><span>Guard count</span><b>06</b></div>
+          <div class="deck-stat-row"><span>Bonds</span><b>08</b></div>
+          <div class="deck-stat-row warn"><span>Mood balance</span><b>NEEDS 2 GUARD</b></div>
+        </div>
+      </div>
+
+      <!-- CENTER GRID -->
+      <div class="deck-grid">
+        <div class="deck-head">
+          <div class="deck-head-l">
+            <span class="kicker">PERIOD 5 · 月曜日</span>
+            <h2>BUILD YOUR <em>CLUB</em></h2>
+            <h2><span class="h">DECK</span> · 30 / 30</h2>
+          </div>
+          <div class="deck-head-r">
+            <div class="deck-search">⌕ &nbsp; SEARCH 検索</div>
+            <button class="deck-sort-btn">SORT ↓</button>
+            <button class="deck-sort-btn" style="background:var(--lime)">RARITY</button>
+          </div>
+        </div>
+
+        <div class="deck-cards">
+          <!-- 8 cards -->
+          <div class="gcard in-deck" style="--art-1:#ffd6e7;--art-2:#ffb380">
+            <div class="gcard-corner">×3</div>
+            <div class="gcard-head"><span class="gcard-cost">1</span><span class="gcard-name">Lunchtime Confession</span><span class="gcard-rare">◆</span></div>
+            <div class="gcard-art"><span class="gcard-art-glyph">告</span><span class="gcard-art-tag">ART · #014</span></div>
+            <div class="gcard-foot"><span class="suit">STRIKE</span><span>04 / 6dmg</span></div>
+          </div>
+          <div class="gcard" style="--art-1:#cbeaff;--art-2:#92e7ff">
+            <div class="gcard-head"><span class="gcard-cost cyan">2</span><span class="gcard-name">Library Whisper</span><span class="gcard-rare">·</span></div>
+            <div class="gcard-art"><span class="gcard-art-glyph">図</span><span class="gcard-art-tag">LIT · #021</span></div>
+            <div class="gcard-foot"><span class="suit">GUARD</span><span>+8 def</span></div>
+          </div>
+          <div class="gcard in-deck" style="--art-1:#e1ff8a;--art-2:#c6ff3d">
+            <div class="gcard-corner">×2</div>
+            <div class="gcard-head"><span class="gcard-cost lime">0</span><span class="gcard-name">Track & Field</span><span class="gcard-rare">·</span></div>
+            <div class="gcard-art"><span class="gcard-art-glyph">走</span><span class="gcard-art-tag">TRACK · #007</span></div>
+            <div class="gcard-foot"><span class="suit">TACTIC</span><span>draw 2</span></div>
+          </div>
+          <div class="gcard" style="--art-1:#d1bfff;--art-2:#a16cff">
+            <div class="gcard-head"><span class="gcard-cost purple">3</span><span class="gcard-name">After-School Duet</span><span class="gcard-rare">★</span></div>
+            <div class="gcard-art"><span class="gcard-art-glyph">奏</span><span class="gcard-art-tag">MUSIC · #033</span></div>
+            <div class="gcard-foot"><span class="suit">BOND</span><span>10dmg / draw1</span></div>
+          </div>
+          <div class="gcard in-deck" style="--art-1:#ffd6e7;--art-2:#ffb380">
+            <div class="gcard-corner">×2</div>
+            <div class="gcard-head"><span class="gcard-cost">1</span><span class="gcard-name">Hallway Sprint</span><span class="gcard-rare">·</span></div>
+            <div class="gcard-art"><span class="gcard-art-glyph">廊</span><span class="gcard-art-tag">TRACK · #009</span></div>
+            <div class="gcard-foot"><span class="suit">STRIKE</span><span>5dmg ×2</span></div>
+          </div>
+          <div class="gcard" style="--art-1:#ffe0ad;--art-2:#ff9a3d">
+            <div class="gcard-head"><span class="gcard-cost">2</span><span class="gcard-name">Sunset Promise</span><span class="gcard-rare">★</span></div>
+            <div class="gcard-art"><span class="gcard-art-glyph">夕</span><span class="gcard-art-tag">RADIO · #042</span></div>
+            <div class="gcard-foot"><span class="suit">MEMORY</span><span>+3 mood</span></div>
+          </div>
+          <div class="gcard in-deck" style="--art-1:#cbeaff;--art-2:#92e7ff">
+            <div class="gcard-corner">×1</div>
+            <div class="gcard-head"><span class="gcard-cost cyan">1</span><span class="gcard-name">Note Passed Right</span><span class="gcard-rare">◆</span></div>
+            <div class="gcard-art"><span class="gcard-art-glyph">紙</span><span class="gcard-art-tag">ART · #018</span></div>
+            <div class="gcard-foot"><span class="suit">BOND</span><span>+1 focus</span></div>
+          </div>
+          <div class="gcard" style="--art-1:#ffe0ad;--art-2:#ff9a3d">
+            <div class="gcard-head"><span class="gcard-cost">3</span><span class="gcard-name">Festival Finale</span><span class="gcard-rare">★</span></div>
+            <div class="gcard-art"><span class="gcard-art-glyph">祭</span><span class="gcard-art-tag">EVENT · #060</span></div>
+            <div class="gcard-foot"><span class="suit">STRIKE</span><span>14 dmg</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT DECK LIST -->
+      <div class="deck-list">
+        <div class="deck-list-head">
+          <h3>MY <em style="color:var(--pink);font-style:normal">DECK</em></h3>
+          <div class="ct">CARDS<br><b>30/30</b></div>
+        </div>
+
+        <div class="deck-row"><span class="c">1</span><span class="n">Lunchtime Confession</span><span class="x">×3</span><span class="rm">×</span></div>
+        <div class="deck-row"><span class="c lime">0</span><span class="n">Track & Field</span><span class="x">×2</span><span class="rm">×</span></div>
+        <div class="deck-row"><span class="c">1</span><span class="n">Hallway Sprint</span><span class="x">×2</span><span class="rm">×</span></div>
+        <div class="deck-row"><span class="c cyan">1</span><span class="n">Note Passed Right</span><span class="x">×1</span><span class="rm">×</span></div>
+        <div class="deck-row"><span class="c lime">0</span><span class="n">Pencil-flip Combo</span><span class="x">×3</span><span class="rm">×</span></div>
+        <div class="deck-row"><span class="c">2</span><span class="n">Roof-top Stand</span><span class="x">×2</span><span class="rm">×</span></div>
+        <div class="deck-row"><span class="c cyan">2</span><span class="n">Library Whisper</span><span class="x">×2</span><span class="rm">×</span></div>
+        <div class="deck-row"><span class="c purple">3</span><span class="n">After-School Duet</span><span class="x">×1</span><span class="rm">×</span></div>
+        <div class="deck-row"><span class="c">2</span><span class="n">Sunset Promise</span><span class="x">×2</span><span class="rm">×</span></div>
+        <div class="deck-row"><span class="c">3</span><span class="n">Festival Finale</span><span class="x">×1</span><span class="rm">×</span></div>
+
+        <div class="deck-cta">
+          <button class="save">SAVE</button>
+          <button class="equip">EQUIP →</button>
+        </div>
+      </div>
+
+      <!-- stickies -->
+      <div class="deck-stickies">
+        <div class="sticky pink"><b>NOTE</b>Run is light on Guard — vs Hall Monitor add 2 Library Whisper.</div>
+        <div class="sticky"><b>MEMO ★</b>Festival Finale unlocks at LV 18 — 1 more period.</div>
+        <div class="sticky cyan"><b>FROM REI</b>let's duel after homeroom 〜♡</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ BATTLE ═════════════════════════════════════════ -->
+  <section class="frame">
+    <div class="frame-tag"><em>03</em>BATTLE · ROOFTOP CIRCUIT</div>
+    <div class="frame-side"><i></i><i></i><i></i></div>
+    <div class="battle">
+      <div class="speed-lines"></div>
+      <div class="tex-noise"></div>
+
+      <!-- foe panel -->
+      <div class="bt-foe">
+        <div class="bt-foe-art">
+          <span class="glyph">監</span>
+          <span class="lab"><b>OPPONENT ART</b>RIVAL · DROP HERE</span>
+        </div>
+        <div class="bt-foe-info">
+          <div class="bt-foe-jp">風紀委員</div>
+          <div class="bt-foe-name">HALL MONITOR<br>AKIRA</div>
+          <div class="bt-foe-tags">
+            <span class="bt-tag pink">RIVAL</span>
+            <span class="bt-tag cyan">JUDO</span>
+            <span class="bt-tag lime">2ND YR</span>
+          </div>
+          <div class="bt-mood">
+            <span class="mood pink">FURIOUS · 3</span>
+            <span class="mood">GUARD UP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- foe HP bars below panel -->
+      <div class="bt-foe-bars">
+        <div class="pbar" style="flex:2.4">
+          <div class="pbar-fill pink" style="width:62%"></div>
+          <div class="pbar-text"><span>HP</span><span>74 / 120</span></div>
+        </div>
+        <div class="pbar" style="flex:1">
+          <div class="pbar-fill cyan" style="width:80%"></div>
+          <div class="pbar-text"><span>BLOCK</span><span>16</span></div>
+        </div>
+      </div>
+
+      <!-- speech bubble -->
+      <div class="bt-bubble">「君の遊び、ここで終わりだ」<br><span style="font-family:'JetBrains Mono';font-size:10px;letter-spacing:.18em;color:var(--pencil)">YOUR FUN ENDS HERE.</span></div>
+
+      <!-- turn marker -->
+      <div class="bt-turn">
+        <div class="bt-turn-tag">YOUR TURN ・ 5</div>
+        <div class="bt-turn-num">★ 03 / 12</div>
+      </div>
+
+      <!-- left HUD -->
+      <div class="bt-hud-left">
+        <div class="bt-name-row">
+          <div class="av">A1</div>
+          <div>
+            <div class="nm">CADET REN</div>
+            <div class="sub">YR 2 · ART CLUB · LV 17</div>
+          </div>
+        </div>
+        <div class="bt-hud-row">
+          <div class="bt-hud-lbl"><span>HP <em>体力</em></span><span>96 / 110</span></div>
+          <div class="pbar"><div class="pbar-fill pink" style="width:88%"></div></div>
+        </div>
+        <div class="bt-hud-row">
+          <div class="bt-hud-lbl"><span>RESOLVE <em>気力</em></span><span>3 / 3</span></div>
+          <div class="pbar"><div class="pbar-fill cyan" style="width:100%"></div></div>
+        </div>
+        <div class="bt-hud-row">
+          <div class="bt-hud-lbl"><span>MOOD <em>気分</em></span><span>+04</span></div>
+          <div class="pbar"><div class="pbar-fill lime" style="width:55%"></div></div>
+        </div>
+        <div class="bt-mood">
+          <span class="mood lime">FOCUSED · 2</span>
+          <span class="mood cyan">DRAW +1</span>
+          <span class="mood">BOND · REI</span>
+        </div>
+      </div>
+
+      <!-- center card -->
+      <div class="bt-center">
+        <div class="bt-center-card">
+          <div class="gcard-head"><span class="gcard-cost">2</span><span class="gcard-name">HALLWAY SPRINT</span><span class="gcard-rare">◆</span></div>
+          <div class="gcard-art" style="--art-1:#ffd6e7;--art-2:#ffb380"><span class="gcard-art-glyph">廊</span><span class="gcard-art-tag">TRACK · #009</span></div>
+          <div class="body">Deal <em>5 dmg ×2</em>. If you have BOND, draw 1 — you're not running alone.</div>
+        </div>
+      </div>
+
+      <div class="bt-impact">DOKI★DOKI</div>
+
+      <!-- hand -->
+      <div class="bt-hand">
+        <div class="bt-hand-rail">
+          <div class="hcard h1">
+            <div class="gcard-head"><span class="gcard-cost lime">0</span><span class="gcard-name">Pencil-flip Combo</span><span class="gcard-rare">·</span></div>
+            <div class="gcard-art" style="--art-1:#e1ff8a;--art-2:#c6ff3d"><span class="gcard-art-glyph">筆</span></div>
+            <div class="gcard-foot"><span class="suit">TACTIC</span><span>draw 1</span></div>
+          </div>
+          <div class="hcard h2">
+            <div class="gcard-head"><span class="gcard-cost">1</span><span class="gcard-name">Lunchtime Confession</span><span class="gcard-rare">◆</span></div>
+            <div class="gcard-art" style="--art-1:#ffd6e7;--art-2:#ffb380"><span class="gcard-art-glyph">告</span></div>
+            <div class="gcard-foot"><span class="suit">STRIKE</span><span>6 dmg</span></div>
+          </div>
+          <div class="hcard h3" style="border-color:var(--lime);box-shadow:0 0 0 6px var(--lime),6px 6px 0 var(--ink);transform:rotate(0deg) translateY(-22px)">
+            <div class="gcard-head"><span class="gcard-cost">2</span><span class="gcard-name">Hallway Sprint</span><span class="gcard-rare">◆</span></div>
+            <div class="gcard-art" style="--art-1:#ffd6e7;--art-2:#ffb380"><span class="gcard-art-glyph">廊</span></div>
+            <div class="gcard-foot"><span class="suit">STRIKE</span><span>5 dmg ×2</span></div>
+          </div>
+          <div class="hcard h4">
+            <div class="gcard-head"><span class="gcard-cost cyan">1</span><span class="gcard-name">Library Whisper</span><span class="gcard-rare">·</span></div>
+            <div class="gcard-art" style="--art-1:#cbeaff;--art-2:#92e7ff"><span class="gcard-art-glyph">図</span></div>
+            <div class="gcard-foot"><span class="suit">GUARD</span><span>+8 def</span></div>
+          </div>
+          <div class="hcard h5">
+            <div class="gcard-head"><span class="gcard-cost purple">3</span><span class="gcard-name">After-School Duet</span><span class="gcard-rare">★</span></div>
+            <div class="gcard-art" style="--art-1:#d1bfff;--art-2:#a16cff"><span class="gcard-art-glyph">奏</span></div>
+            <div class="gcard-foot"><span class="suit">BOND</span><span>10 / draw1</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- end turn -->
+      <div class="bt-end">
+        <div class="bt-energy"><span class="star">★</span> 02 / 03 RESOLVE</div>
+        <button class="bt-end-btn">END TURN <span style="font-family:'Shippori Mincho'">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ RESULT ═════════════════════════════════════════ -->
+  <section class="frame">
+    <div class="frame-tag"><em>04</em>RESULT · MEMORY</div>
+    <div class="frame-side"><i></i><i></i><i></i></div>
+    <div class="result">
+      <div class="result-rays"></div>
+      <div class="result-tape-top"></div>
+      <div class="tex-halftone"></div>
+      <div class="tex-noise"></div>
+
+      <!-- polaroid -->
+      <div class="polaroid">
+        <div class="polaroid-photo">
+          <span class="stamp">11.07 · 17:42</span>
+          <span class="label"><b>MEMORY · DROP HERE</b>VICTORY MOMENT · 1024×800</span>
+        </div>
+        <div class="polaroid-cap">
+          rooftop · the bell rang.<br>
+          <small>AFTER★CLUB · CHAPTER 03 · PERIOD 5</small>
+        </div>
+      </div>
+
+      <div class="result-stamp">
+        <span class="jp">勝</span>
+        <span class="en">VICTORY</span>
+      </div>
+
+      <!-- sticker plane -->
+      <div class="result-plane"></div>
+
+      <!-- ticket -->
+      <div class="result-ticket">
+        <div class="ticket-head"><span>TRAIN TICKET</span><span>NO.024</span></div>
+        <div class="ticket-body">
+          <b>HOME ← SCHOOL</b>
+          <span>17:42 · 木曜日</span>
+          <div style="margin-top:6px;font-family:Caveat;font-size:18px;color:var(--purple)">"see you tomorrow."</div>
+        </div>
+        <div class="ticket-perforation"></div>
+        <div class="ticket-body" style="display:flex;justify-content:space-between;align-items:center">
+          <b style="font-size:14px">FARE ¥ 220</b>
+          <span style="font-size:9px">★ MEMORY KEPT</span>
+        </div>
+      </div>
+
+      <!-- right card -->
+      <div class="result-card">
+        <span class="kick"><em>★</em> CHAPTER 03 — PERIOD 5 — ROOFTOP CIRCUIT</span>
+        <h2><em>YOU</em></h2>
+        <h2><span class="h">WIN!</span></h2>
+        <span class="jp-line">勝負あり ─ そろそろ帰ろう</span>
+
+        <div class="body">
+          <div class="r-stat"><span class="l">TURNS</span><span class="v"><em>07</em></span></div>
+          <div class="r-stat"><span class="l">DAMAGE DEALT</span><span class="v">128</span></div>
+          <div class="r-stat"><span class="l">DAMAGE TAKEN</span><span class="v">14</span></div>
+          <div class="r-stat"><span class="l">MOOD AT FINISH</span><span class="v acid">FOCUSED</span></div>
+        </div>
+
+        <div class="result-rewards">
+          <div class="r-reward"><span class="ic p">★</span>EXP <span class="x">+ 240</span></div>
+          <div class="r-reward"><span class="ic c">¥</span>YEN <span class="x">+ 1,420</span></div>
+          <div class="r-reward"><span class="ic l">◆</span>RARE <span class="x">×1</span></div>
+        </div>
+
+        <div class="result-cta">
+          <button class="next">NEXT PERIOD →</button>
+          <button class="menu">CLUB ROOM</button>
+        </div>
+      </div>
+
+      <!-- diary -->
+      <div class="result-diary">
+        <b>★ DIARY · 11.07</b>
+        won today. akira said nothing — just tossed back the eraser. it felt like spring even though it isn't.
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
